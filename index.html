@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172033">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="我的條碼卡">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="manifest.json">
+  <title>我的條碼卡</title>
+  <style>
+    :root{--ink:#172033;--muted:#687086;--paper:#fff;--bg:#f3f5f9;--accent:#1c7cff}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 10% 0,#dceeff 0,transparent 30%),var(--bg);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}main{width:min(100%,470px)}.title{text-align:center;margin:0 0 8px;font-size:28px;letter-spacing:.05em}.subtitle{text-align:center;color:var(--muted);margin:0 0 28px;font-size:14px}.stores{display:grid;gap:14px}.store{background:var(--paper);border:1px solid #e6e9ef;border-radius:20px;padding:17px;box-shadow:0 10px 25px #233a5c12}.store-head{display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{display:flex;align-items:center;gap:11px;font-size:18px;font-weight:800}.logo{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff;font-size:12px;letter-spacing:-.06em}.family{background:linear-gradient(135deg,#126f43 48%,#48a840 48% 67%,#234d9c 67%)}.seven{background:linear-gradient(135deg,#ee5b22 0 36%,#20894d 36% 67%,#e8452b 67%);font-size:17px;font-style:italic}.carrier{background:linear-gradient(135deg,#172033,#1c7cff)}button{appearance:none;border:0;cursor:pointer;font:inherit}.show{padding:9px 13px;color:#fff;background:var(--accent);border-radius:10px;font-weight:700;white-space:nowrap}.barcodes{display:grid;grid-template-columns:1fr;gap:12px;max-height:0;overflow:hidden;opacity:0;transition:max-height .36s ease,opacity .22s ease,margin-top .36s ease}.store.open .barcodes{max-height:700px;opacity:1;margin-top:17px}.barcode{background:#fff;border:1px solid #e9ebef;border-radius:13px;padding:12px;text-align:center}.barcode-title{margin:0 0 7px;color:var(--muted);font-size:13px;font-weight:700}.barcode img{display:block;width:100%;height:auto;max-height:160px;object-fit:contain}.hint{margin:22px 10px 0;text-align:center;color:var(--muted);line-height:1.6;font-size:12px}
+  </style>
+</head>
+<body>
+  <main>
+    <h1 class="title">我的條碼卡</h1>
+    <p class="subtitle">點選店家，一次顯示載具與會員條碼</p>
+    <section class="stores" aria-label="店家條碼">
+      <article class="store">
+        <div class="store-head"><div class="brand"><span class="logo family">Fami</span>全家 FamilyMart</div><button class="show">顯示條碼</button></div>
+        <div class="barcodes">
+          <div class="barcode"><p class="barcode-title">載具條碼</p><img alt="全家載具條碼" src="family-carrier-barcode.png"></div>
+          <div class="barcode"><p class="barcode-title">會員條碼</p><img alt="全家會員條碼" src="family-member-barcode.png"></div>
+        </div>
+      </article>
+      <article class="store">
+        <div class="store-head"><div class="brand"><span class="logo seven">7</span>7-ELEVEN</div><button class="show">顯示條碼</button></div>
+        <div class="barcodes">
+          <div class="barcode"><p class="barcode-title">載具條碼</p><img alt="7-ELEVEN載具條碼" src="seven-carrier-barcode.png"></div>
+          <div class="barcode"><p class="barcode-title">會員條碼</p><img alt="7-ELEVEN會員條碼" src="seven-member-barcode.png"></div>
+        </div>
+      </article>
+      <article class="store">
+        <div class="store-head"><div class="brand"><span class="logo carrier">載具</span>單獨載具</div><button class="show">顯示條碼</button></div>
+        <div class="barcodes"><div class="barcode"><p class="barcode-title">載具條碼</p><img alt="單獨載具條碼" src="family-carrier-barcode.png"></div></div>
+      </article>
+    </section>
+    <p class="hint">條碼圖片已直接儲存在此專案中，可離線開啟。</p>
+  </main>
+  <script>
+    document.querySelectorAll('.show').forEach(button => button.addEventListener('click', () => {
+      const card = button.closest('.store');
+      const open = card.classList.toggle('open');
+      button.textContent = open ? '收起條碼' : '顯示條碼';
+    }));
+  </script>
+</body>
+</html>
