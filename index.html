@@ -17,34 +17,34 @@
 </head>
 <body>
   <main>
-    <h1 class="title">我的條碼卡</h1>
-    <p class="subtitle">點選店家，一次顯示載具與會員條碼</p>
     <section class="stores" aria-label="店家條碼">
+      <article class="store open">
+        <div class="barcode"><p class="barcode-title">載具條碼</p><img alt="單獨載具條碼" src="family-carrier-barcode.png"></div>
+      </article>
       <article class="store">
         <div class="store-head"><div class="brand"><span class="logo family">Fami</span>全家 FamilyMart</div><button class="show">顯示條碼</button></div>
         <div class="barcodes">
-          <div class="barcode"><p class="barcode-title">載具條碼</p><img alt="全家載具條碼" src="family-carrier-barcode.png"></div>
           <div class="barcode"><p class="barcode-title">會員條碼</p><img alt="全家會員條碼" src="family-member-barcode.png"></div>
         </div>
       </article>
       <article class="store">
         <div class="store-head"><div class="brand"><span class="logo seven">7</span>7-ELEVEN</div><button class="show">顯示條碼</button></div>
         <div class="barcodes">
-          <div class="barcode"><p class="barcode-title">載具條碼</p><img alt="7-ELEVEN載具條碼" src="seven-carrier-barcode.png"></div>
           <div class="barcode"><p class="barcode-title">會員條碼</p><img alt="7-ELEVEN會員條碼" src="seven-member-barcode.png"></div>
         </div>
       </article>
-      <article class="store">
-        <div class="store-head"><div class="brand"><span class="logo carrier">載具</span>單獨載具</div><button class="show">顯示條碼</button></div>
-        <div class="barcodes"><div class="barcode"><p class="barcode-title">載具條碼</p><img alt="單獨載具條碼" src="family-carrier-barcode.png"></div></div>
-      </article>
     </section>
-    <p class="hint">條碼圖片已直接儲存在此專案中，可離線開啟。</p>
   </main>
   <script>
     document.querySelectorAll('.show').forEach(button => button.addEventListener('click', () => {
       const card = button.closest('.store');
-      const open = card.classList.toggle('open');
+      const open = !card.classList.contains('open');
+      document.querySelectorAll('.show').forEach(storeButton => {
+        const store = storeButton.closest('.store');
+        store.classList.remove('open');
+        storeButton.textContent = '顯示條碼';
+      });
+      card.classList.toggle('open', open);
       button.textContent = open ? '收起條碼' : '顯示條碼';
     }));
   </script>
